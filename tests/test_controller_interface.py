@@ -1,3 +1,5 @@
+import json
+
 import numpy as np
 import pytest
 
@@ -55,6 +57,46 @@ def test_planner_entry_point_uses_track_observation() -> None:
     obs = build_track_controller_observation(qpos=qpos, track=track)
     command = planner.command(obs, t=1.0)
     assert command.shape == (3,)
+    assert np.all(np.isfinite(command))
+
+
+def test_race_ff_planner_loads_learned_weights(tmp_path) -> None:
+    weights = tmp_path / "planner_weights.npz"
+    np.savez(
+        weights,
+        speed_mps=np.asarray(0.8),
+        min_speed_mps=np.asarray(0.2),
+        max_lateral_speed_mps=np.asarray(0.15),
+        max_yaw_rate_radps=np.asarray(0.7),
+        k_heading=np.asarray(0.9),
+        k_lateral=np.asarray(0.12),
+        turn_speed_drop=np.asarray(0.3),
+        margin_power=np.asarray(0.6),
+        curvature_feedforward=np.asarray(1.0),
+        stand_seconds=np.asarray(0.0),
+    )
+    cfg = tmp_path / "planner_config.json"
+    cfg.write_text(
+        json.dumps(
+            {
+                "planner_type": "race_ff",
+                "weights_path": "planner_weights.npz",
+                "track_length_m": 200.0,
+                "turn_radius_m": 18.25,
+                "half_width_m": 2.0,
+            }
+        ),
+        encoding="utf-8",
+    )
+    planner = StarterTrackPlanner.load(cfg)
+    track = StandardOvalTrack()
+    xy, heading, _ = track.centerline_pose(0.0)
+    qpos = np.zeros(19, dtype=np.float32)
+    qpos[:2] = xy
+    qpos[3:7] = np.asarray([np.cos(0.5 * heading), 0.0, 0.0, np.sin(0.5 * heading)], dtype=np.float32)
+    obs = build_track_controller_observation(qpos=qpos, track=track)
+    command = planner.command(obs, t=1.0)
+    assert command[0] > 0.1
     assert np.all(np.isfinite(command))
 
 

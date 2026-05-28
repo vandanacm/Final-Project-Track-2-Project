@@ -36,11 +36,11 @@ SEARCH_KEYS = [
 
 
 BOUNDS = {
-    "speed_mps": (0.20, 0.90),
-    "max_lateral_speed_mps": (0.03, 0.22),
-    "max_yaw_rate_radps": (0.12, 0.75),
-    "k_heading": (0.20, 1.40),
-    "k_lateral": (0.02, 0.24),
+    "speed_mps": (0.20, 1.05),
+    "max_lateral_speed_mps": (0.03, 0.28),
+    "max_yaw_rate_radps": (0.12, 1.05),
+    "k_heading": (0.20, 1.60),
+    "k_lateral": (0.02, 0.30),
     "heading_slowdown": (0.0, 0.80),
 }
 

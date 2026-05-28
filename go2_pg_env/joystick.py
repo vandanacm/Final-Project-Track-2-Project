@@ -65,9 +65,9 @@ def default_config() -> config_dict.ConfigDict:
         ),
         reward_config=config_dict.create(
             scales=config_dict.create(
-                # Task terms
-                tracking_lin_vel=1.0,
-                tracking_ang_vel=0.5,
+                # Task terms (race build: stronger command tracking, esp. yaw)
+                tracking_lin_vel=1.25,
+                tracking_ang_vel=1.0,
                 # Stability terms
                 lin_vel_z=-0.5,
                 ang_vel_xy=-0.05,
@@ -564,9 +564,17 @@ class Joystick(go2_base.Go2Env):
         1. keep the baseline forward-only ranges as the starting point
         2. widen the stage_2 sampling range toward `self._student_stage2_goal_*`
         3. increase the probability of non-zero `vy` and `yaw_rate` commands
+
+        Race build: expose the full goal envelope (high forward speed + nonzero
+        vy / yaw_rate) so the low-level policy learns to track the fast turning
+        commands the high-level race planner emits on the oval.
         """
         del current_command
-        return self._cmd_min, self._cmd_max, self._cmd_b
+        return (
+            self._student_stage2_goal_min,
+            self._student_stage2_goal_max,
+            self._student_stage2_goal_b,
+        )
 
     def sample_command(self, rng: jax.Array, current_command: jax.Array) -> jax.Array:
         rng, y_rng, w_rng, z_rng = jax.random.split(rng, 4)

@@ -17,6 +17,21 @@ python train_highlevel_starter.py \
 This is a minimal black-box search over starter planner parameters. It is useful
 for debugging the loop, but it is not a final learned planner by itself.
 
+## Learned Race Planner (recommended)
+
+```bash
+python scripts/init_race_planner_weights.py --include-mlp
+
+python train_highlevel_mlp.py \
+  --checkpoint-dir path/to/best_checkpoint \
+  --planner-type race_ff \
+  --output-dir artifacts/highlevel_race/race_ff \
+  --iterations 12 --population 16 --eval-seconds 120
+```
+
+Use `configs/race_planner.json` and `planner_weights.npz` for evaluation. See
+`docs/race_strategy.md` for lap-time targets and low-level retraining guidance.
+
 ## What To Train
 
 Train a policy with parameters `theta`:
