@@ -66,7 +66,7 @@ def default_config() -> config_dict.ConfigDict:
         reward_config=config_dict.create(
             scales=config_dict.create(
                 # Task terms (race build: stronger command tracking, esp. yaw)
-                tracking_lin_vel=1.25,
+                tracking_lin_vel=1.5,
                 tracking_ang_vel=1.0,
                 # Stability terms
                 lin_vel_z=-0.5,
@@ -80,13 +80,17 @@ def default_config() -> config_dict.ConfigDict:
                 torques=-0.0002,
                 action_rate=-0.01,
                 energy=-0.001,
-                # Foot-behavior terms
-                feet_clearance=-2.0,
+                # Foot-behavior terms (lighter clearance penalty so a longer,
+                # faster stride is not suppressed at race speeds)
+                feet_clearance=-1.0,
                 feet_height=-0.2,
                 feet_slip=-0.1,
                 feet_air_time=0.1,
             ),
-            tracking_sigma=0.25,
+            # Broader tracking kernel: a high commanded speed the policy has not
+            # yet reached still yields a reward gradient, instead of ~0 reward
+            # that traps the policy into marching in place.
+            tracking_sigma=0.4,
             max_foot_height=0.1,
         ),
         pert_config=config_dict.create(

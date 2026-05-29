@@ -88,13 +88,13 @@ def default_race_ff_params() -> dict[str, float]:
     stock HW1 checkpoint (vx <= ~1.0), drop speed_mps toward 0.9 first.
     """
     return {
-        "speed_mps": 2.80,
+        "speed_mps": 2.40,
         "min_speed_mps": 1.00,
         "max_lateral_speed_mps": 0.25,
         "max_yaw_rate_radps": 1.00,
         "k_heading": 1.10,
         "k_lateral": 0.18,
-        "turn_speed_drop": 0.30,
+        "turn_speed_drop": 0.25,
         "margin_power": 0.50,
         "curvature_feedforward": 1.10,
         "stand_seconds": 0.30,
