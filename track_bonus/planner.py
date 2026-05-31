@@ -81,20 +81,20 @@ def _resolve_weights_path(config: StarterPlannerConfig, planner_config_path: Pat
 
 
 def default_race_ff_params() -> dict[str, float]:
-    """Finish 200 m lap within ~100 s: ~2.5 m/s straights, ~2.38 m/s turns.
+    """Finish 200 m lap in ~103 s at ~1.94 m/s avg. Stable through turns.
 
     Assumes a low-level policy trained with stage_2 goal ranges (vx≤2.5, vy, yaw).
     """
     return {
         "speed_mps": 2.50,
-        "min_speed_mps": 1.60,
+        "min_speed_mps": 1.40,
         "max_lateral_speed_mps": 0.30,
         "max_yaw_rate_radps": 1.20,
-        "k_heading": 1.25,
-        "k_lateral": 0.25,
-        "turn_speed_drop": 0.05,
-        "margin_power": 0.35,
-        "curvature_feedforward": 1.20,
+        "k_heading": 1.20,
+        "k_lateral": 0.22,
+        "turn_speed_drop": 0.10,
+        "margin_power": 0.40,
+        "curvature_feedforward": 1.15,
         "stand_seconds": 0.0,
     }
 
