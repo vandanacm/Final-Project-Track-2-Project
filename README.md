@@ -1,5 +1,7 @@
 # Go2 Track 2 Bonus Project Starter
 
+**Team:** Pranav_Vandana — Pranav Narayanan Murali, Vandana C M
+
 Starter code for the Track 2 final-project option: make a Unitree Go2 run as
 far as possible around a 200 m oval track in MuJoCo.
 
