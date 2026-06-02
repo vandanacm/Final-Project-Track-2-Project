@@ -1,0 +1,11 @@
+{
+  "team_name": "Pranav_Vandana",
+  "track2_option": "leaderboard",
+  "checkpoint_dir": "best_checkpoint",
+  "planner_config": "planner_config.json",
+  "planner_code": "planner.py",
+  "planner_weights": "none (race_ff uses default learned params, no weights file)",
+  "high_level_planner_type": "learned",
+  "track_eval": "track_eval/results.json",
+  "notes": "Low-level: PPO stage_2 policy (vx<=2.5, vy, yaw_rate) trained for ~6M steps. High-level: race_ff feedforward + Stanley-style PD controller with speed/heading tuning. Achieves full 200m lap in ~108s at ~1.86 m/s avg with perfect line keeping."
+}

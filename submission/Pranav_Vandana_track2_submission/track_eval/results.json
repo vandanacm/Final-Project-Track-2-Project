@@ -1,0 +1,42 @@
+{
+  "challenge": "track_bonus",
+  "entry_name": "change_me",
+  "checkpoint_dir": "/content/go2_track_bonus_repo/artifacts/low_level_train/best_checkpoint",
+  "planner_config": "/content/go2_track_bonus_repo/configs/race_planner.json",
+  "official_track": {
+    "track_length_m": 200.0,
+    "turn_radius_m": 18.25,
+    "half_width_m": 2.0
+  },
+  "metrics": {
+    "lap_completion": 1.0,
+    "valid_distance_m": 200.0,
+    "finish_time": 107.64,
+    "mean_progress_speed": 1.858045336306206,
+    "alive_time": 107.64,
+    "fall": false,
+    "fall_step": null,
+    "boundary_violation": false,
+    "boundary_violation_step": null,
+    "rms_lateral_error": 0.20254014394963776,
+    "max_lateral_error": 0.2571533459279314,
+    "min_boundary_margin_m": 1.7428466540720686,
+    "energy_proxy": 16.954269409179688,
+    "foot_slip_proxy": 1.9273979663848877,
+    "total_time": 120.0,
+    "num_steps": 6000
+  },
+  "scores": {
+    "completion_score": 1.0,
+    "speed_score": 1.0,
+    "line_keeping_score": 1.0,
+    "stability_score": 1.0,
+    "efficiency_score": 0.45479563120249156,
+    "composite_score": 0.9727397815601246
+  },
+  "artifacts": {
+    "leaderboard_csv": "/content/go2_track_bonus_repo/artifacts/track_eval/leaderboard.csv",
+    "rollouts_npz": "/content/go2_track_bonus_repo/artifacts/track_eval/race_rollouts.npz",
+    "video_path": "/content/go2_track_bonus_repo/artifacts/track_eval/race.mp4"
+  }
+}
